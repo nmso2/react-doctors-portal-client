@@ -8,7 +8,6 @@ import Box from '@mui/material/Box';
 
 const bannerBg = {
     background: `url(${bg})`,
-
 }
 
 const verticalCenter = {
@@ -19,7 +18,7 @@ const verticalCenter = {
 
 const Banner = () => {
     return (
-        <Container style={bannerBg} sx={{ flexGrow: 1 }}>
+        <Container style={bannerBg} sx={{ flexGrow: 1, marginTop: 2 }}>
             <Grid container spacing={2}>
                 <Grid item style={{ ...verticalCenter, textAlign: 'left' }} xs={12} md={6}>
                     <Box>

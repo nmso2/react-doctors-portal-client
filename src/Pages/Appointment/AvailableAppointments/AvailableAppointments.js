@@ -51,6 +51,7 @@ const AvailableAppointments = ({ date }) => {
                         <Grid item xs={4} sm={4} md={4} key={index}>
                             <Booking
                                 booking={booking}
+                                date={date}
                             >
                             </Booking>
                         </Grid>

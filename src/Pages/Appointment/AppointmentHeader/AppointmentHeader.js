@@ -4,7 +4,7 @@ import chair from '../../../images/chair.png'
 import Calender from '../../Shared/Calender/Calender';
 const AppointmentHeader = ({ date, setDate }) => {
     return (
-        <Container>
+        <Container sx={{marginTop: 5}}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
                     <Calender date={date} setDate={setDate}></Calender>
