@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
+import useAuth from '../../../hooks/useAuth';
 
 const style = {
     position: 'absolute',
@@ -18,6 +19,8 @@ const style = {
 };
 
 const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
+
+    const { user } = useAuth();
 
     const timeRef = useRef();
     const nameRef = useRef();
@@ -72,33 +75,36 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
                     />
                     <TextField
                         sx={{ width: '90%', m: 1 }}
+                        disabled
                         id="outlined-size-small"
                         size="small"
-                        placeholder='Name'
+                        defaultValue={date.toLocaleDateString()}
+                        inputRef={dateRef}
+                    />
+                    <TextField
+                        sx={{ width: '90%', m: 1 }}
+                        id="outlined-size-small"
+                        size="small"
+                        defaultValue={user.displayName}
                         inputRef={nameRef}
                     />
                     <TextField
                         sx={{ width: '90%', m: 1 }}
                         id="outlined-size-small"
                         size="small"
-                        placeholder='Phone Number'
-                        inputRef={phoneRef}
-                    />
-                    <TextField
-                        sx={{ width: '90%', m: 1 }}
-                        id="outlined-size-small"
-                        size="small"
-                        placeholder="Email"
+                        defaultValue={user.email}
                         inputRef={emailRef}
                     />
                     <TextField
                         sx={{ width: '90%', m: 1 }}
-                        disabled
                         id="outlined-size-small"
                         size="small"
-                        defaultValue={date.toDateString()}
-                        inputRef={dateRef}
+                        placeholder='Phone Number'
+                        type='tel'
+                        inputRef={phoneRef}
                     />
+
+
                     <Button variant="contained" style={{ backgroundColor: '#5CE7ED', marginBottom: 25 }} type="submit">SEND</Button>
                 </form>
             </Box>

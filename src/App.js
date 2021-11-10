@@ -8,29 +8,33 @@ import Home from './Pages/Home/Home/Home';
 import Appointment from './Pages/Appointment/Appointment/Appointment';
 import Login from './Pages/Login/Login/Login';
 import Registration from './Pages/Login/Registration/Registration';
+import AuthProvider from './context/AuthProvider';
+import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/appointment">
-            <Appointment />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/registration">
-            <Registration />
-          </Route>
-        </Switch>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/home">
+              <Home />
+            </Route>
+            <PrivateRoute path="/appointment">
+              <Appointment />
+            </PrivateRoute>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/registration">
+              <Registration />
+            </Route>
+          </Switch>
+        </Router>
+      </AuthProvider>
     </div>
   );
 }
