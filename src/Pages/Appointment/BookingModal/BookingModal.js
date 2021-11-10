@@ -44,7 +44,7 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    alert('Succesfully added user');
+                    alert('Appointment Confirmed!');
                 }
             })
         handleBookingClose();
@@ -68,28 +68,28 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
                         id="outlined-size-small"
                         size="small"
                         defaultValue={booking.time}
-                        ref={timeRef}
+                        inputRef={timeRef}
                     />
                     <TextField
                         sx={{ width: '90%', m: 1 }}
                         id="outlined-size-small"
                         size="small"
                         placeholder='Name'
-                        ref={nameRef}
+                        inputRef={nameRef}
                     />
                     <TextField
                         sx={{ width: '90%', m: 1 }}
                         id="outlined-size-small"
                         size="small"
                         placeholder='Phone Number'
-                        ref={phoneRef}
+                        inputRef={phoneRef}
                     />
                     <TextField
                         sx={{ width: '90%', m: 1 }}
                         id="outlined-size-small"
                         size="small"
                         placeholder="Email"
-                        ref={emailRef}
+                        inputRef={emailRef}
                     />
                     <TextField
                         sx={{ width: '90%', m: 1 }}
@@ -97,7 +97,7 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
                         id="outlined-size-small"
                         size="small"
                         defaultValue={date.toDateString()}
-                        ref={dateRef}
+                        inputRef={dateRef}
                     />
                     <Button variant="contained" style={{ backgroundColor: '#5CE7ED', marginBottom: 25 }} type="submit">SEND</Button>
                 </form>
