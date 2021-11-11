@@ -91,6 +91,17 @@ const useFirebase = () => {
         });
     }
 
+    const saveUser = (email, displayName, method)=>{
+        const user = {email, displayName};
+        fetch('http://localhost:5000/users',{
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then()
+    }
 
     return {
         user,
@@ -110,7 +121,8 @@ const useFirebase = () => {
         setUserName,
         setError,
         logInUsingGithub,
-        logInUsingFacebook
+        logInUsingFacebook,
+        saveUser
     }
 
 }

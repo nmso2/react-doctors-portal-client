@@ -8,7 +8,7 @@ import useAuth from '../../../hooks/useAuth';
 import login from '../../../images/login.png'
 
 const Registration = () => {
-    const { logInUsingGoogle, setIsLoading, createNewUser, handleNameChange, handaleEmailChange, handalePasswordChange, email, password, setUserName, error, setError, logInUsingGithub, logInUsingFacebook, isLoading, user } = useAuth();
+    const { logInUsingGoogle, setIsLoading, createNewUser, handleNameChange, handaleEmailChange, handalePasswordChange, email, password, setUserName, error, setError, logInUsingGithub, logInUsingFacebook, isLoading, user, saveUser } = useAuth();
 
     const location = useLocation();
     const history = useHistory()
@@ -26,6 +26,7 @@ const Registration = () => {
                 setUserName();
                 history.push('/login');
                 setError('');
+                saveUser(loginData.email, loginData.name, 'POST');
             }).catch((error) => {
                 setError(error.message);
             }).finally(() => { setIsLoading(false) });

@@ -9,7 +9,7 @@ import login from '../../../images/login.png'
 
 const Login = () => {
 
-    const { logInUsingGoogle, setIsLoading, loginWithEmailPassword, handaleEmailChange, handalePasswordChange, email, password, setUser, error, setError, logInUsingGithub, logInUsingFacebook, isLoading } = useAuth();
+    const { logInUsingGoogle, setIsLoading, loginWithEmailPassword, handaleEmailChange, handalePasswordChange, email, password, setUser, error, setError, logInUsingGithub, logInUsingFacebook, isLoading, saveUser, user } = useAuth();
 
     const location = useLocation();
     const history = useHistory()
@@ -29,6 +29,7 @@ const Login = () => {
             .then((result) => {
                 history.push(redirect_uri);
                 setError('');
+                saveUser(result.user.email, result.user.displayName, 'PUT');
             }).catch((error) => {
                 setError(error.message);
             }).finally(() => setIsLoading(false));
@@ -39,7 +40,7 @@ const Login = () => {
         loginWithEmailPassword(loginData.email, loginData.password)
             .then(result => {
                 history.push(redirect_uri);
-                setError('')
+                setError('');
                 setUser(result);
             }).catch((error) => {
                 setError(error.message);
