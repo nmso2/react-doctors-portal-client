@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, FacebookAuthProvider, GithubAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, FacebookAuthProvider, GithubAuthProvider, getIdToken } from "firebase/auth";
 import initializeAuthentication from "../Pages/Login/Firebase/firebase.init";
 
 initializeAuthentication();
@@ -9,7 +9,7 @@ const useFirebase = () => {
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
-    const facebookProvider= new FacebookAuthProvider();
+    const facebookProvider = new FacebookAuthProvider();
 
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
@@ -18,6 +18,10 @@ const useFirebase = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+
+    const [admin, setAdmin] = useState(false);
+    const [token, setToken] = useState('');
 
 
     const logInUsingGoogle = () => {
@@ -62,6 +66,10 @@ const useFirebase = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
+                getIdToken(user)
+                    .then(idToken => {
+                        setToken(idToken);
+                    })
             } else {
 
             }
@@ -69,6 +77,13 @@ const useFirebase = () => {
         });
         // eslint-disable-next-line
     }, [])
+
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${user?.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin));
+    }, [user?.email])
 
 
     const logOut = () => {
@@ -91,20 +106,22 @@ const useFirebase = () => {
         });
     }
 
-    const saveUser = (email, displayName, method)=>{
-        const user = {email, displayName};
-        fetch('http://localhost:5000/users',{
+    const saveUser = (email, displayName, method) => {
+        const user = { email, displayName };
+        fetch('http://localhost:5000/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(user)
         })
-        .then()
+            .then()
     }
 
     return {
         user,
+        admin,
+        token,
         error,
         logInUsingGoogle,
         logOut,

@@ -10,6 +10,8 @@ import login from '../../../images/login.png'
 const Registration = () => {
     const { logInUsingGoogle, setIsLoading, createNewUser, handleNameChange, handaleEmailChange, handalePasswordChange, email, password, setUserName, error, setError, logInUsingGithub, logInUsingFacebook, isLoading, user, saveUser } = useAuth();
 
+    const [success, setSuccess] = useState(false);
+
     const location = useLocation();
     const history = useHistory()
     const redirect_uri = location.state?.from || '/';
@@ -27,6 +29,7 @@ const Registration = () => {
                 history.push('/login');
                 setError('');
                 saveUser(loginData.email, loginData.name, 'POST');
+                setSuccess(true);
             }).catch((error) => {
                 setError(error.message);
             }).finally(() => { setIsLoading(false) });
@@ -90,7 +93,7 @@ const Registration = () => {
                         </NavLink>
                     </form>}
                     {isLoading && <CircularProgress />}
-                    {user?.email && <Alert severity="success">Registration Successfull!</Alert>}
+                    {success && <Alert severity="success">Registration Successfull!</Alert>}
                     {error && <Alert severity="error">{error}</Alert>}
                 </Grid>
                 <Grid item xs={12} md={6}>
