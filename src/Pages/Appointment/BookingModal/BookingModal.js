@@ -35,8 +35,9 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
         const time = timeRef.current.value;
         const date = dateRef.current.value;
         const serviceName = booking.name;
+        const price = booking.price;
 
-        const appointments = { name, email, phone, time, date, serviceName };
+        const appointments = { name, email, phone, time, date, serviceName, price };
 
         fetch('http://localhost:5000/appointments', {
             method: 'POST',
