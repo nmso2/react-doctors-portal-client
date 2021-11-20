@@ -15,7 +15,7 @@ const DashboardAppointments = ({ date }) => {
     const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
-        const url = `http://localhost:5000/appointments?email=${user.email}&date=${date.toLocaleDateString()}`
+        const url = `https://doctors-portel.herokuapp.com/appointments?email=${user.email}&date=${date.toLocaleDateString()}`
         fetch(url, {
             headers: {
                 'authorization': `Bearer ${token}`
@@ -49,7 +49,7 @@ const DashboardAppointments = ({ date }) => {
 
                             <TableCell align="right">{appointment.serviceName}</TableCell>
 
-                            <TableCell align="right">{appointment.payment ? 'Paid' : <Link to={`dashboard/payment/${appointment._id}`} style={{textDecoration: "none"}}>
+                            <TableCell align="right">{appointment.payment ? 'Paid' : <Link to={`dashboard/payment/${appointment._id}`} style={{ textDecoration: "none" }}>
                                 <Button variant="contained" style={{ backgroundColor: '#5CE7ED', marginBottom: 25 }}>Pay</Button>
                             </Link>}</TableCell>
                         </TableRow>

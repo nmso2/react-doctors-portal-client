@@ -39,7 +39,7 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
 
         const appointments = { name, email, phone, time, date, serviceName, price };
 
-        fetch('http://localhost:5000/appointments', {
+        fetch('https://doctors-portel.herokuapp.com/appointments', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
